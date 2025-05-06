@@ -1,0 +1,299 @@
+\usepackage{color}
+\usepackage{amsmath}
+% \usepackage[dvipdfmx]{hyperref}
+\usepackage{braket}
+\usepackage{ifthen}
+\usepackage{caption}
+\usepackage{ascmac}
+% \usepackage{titljesec}
+\usepackage{cases}
+\usepackage{wallpaper}
+\usepackage[sc]{mathpazo}
+\usepackage{tikz}
+\usepackage{bm}
+\usepackage{float}
+    \usepackage[top=30truemm,bottom=30truemm,left=25truemm,right=25truemm]{geometry}
+
+    \makeatletter
+
+
+%----- Equation num brackets -------------------
+
+\newcommand\eqnobrck[1]{(#1)}
+
+%---- Test if a file is loaded ------------------
+
+\newcommand\@iffileloaded[2]{%
+    \expandafter\ifx\csname ver@#1.#2\endcsname\relax
+       \expandafter\@secondoftwo
+    \else
+       \expandafter\@firstoftwo
+    \fi}
+
+%----- For right equation numbers --------------
+
+\renewcommand\@eqnnum{{%
+    \normalfont \normalcolor \eqnobrck{\theequation}}}
+
+%---- For left equation numbers ----------------
+
+\@iffileloaded{leqno}{clo}{%
+    \renewcommand\@eqnnum{\hb@xt@.01\p@{}%
+       \rlap{\normalfont\normalcolor
+       \hskip -\displaywidth\eqnobrck{\theequation}}}
+    }{}
+
+%---- If amsmath is loaded ----------------------
+
+\@ifpackageloaded{amsmath}{%
+     \renewcommand\tagform@[1]{%
+        \maketag@@@{\eqnobrck{\ignorespaces#1\unskip\@@italiccorr}}}
+    }{}
+
+
+ \renewcommand{\theequation}{%
+   \thesection.\arabic{equation}}
+    \@addtoreset{equation}{section}
+
+
+
+
+%   \renewcommand{\section}{%
+%     \@startsection{section}%
+%      {1}%
+%      {\z@}%
+%      {-3.5ex \@plus-1ex \@minus-.2ex}%
+%      {2.3ex \@plus.2ex}%
+%      {\normalfont\huge\bfseries}%
+%   }%
+
+%   \titleformat*{\subsection}{\Large\bfseries}
+
+
+\newcommand{\eq}[2]{
+    \begin{equation}
+        \begin{split}
+        \label{#1}
+        #2
+        \end{split}
+    \end{equation}
+}
+
+\newcommand{\eqnum}[1]{
+    (\ref{#1})
+}
+
+\newcommand{\eqs}[4]{
+    \begin{subnumcases}
+        {}
+        \label{#1} #3 & \\
+        \label{#2} #4 &
+    \end{subnumcases}
+}
+
+\renewcommand{\phi}
+{
+    \varphi
+}
+
+\renewcommand{\epsilon}
+{
+    \varepsilon
+}
+\newcommand{\unit}[1]
+{
+    \,\mathrm{#1}
+}
+
+\newcommand{\digit}[1]
+{
+    \times 10^{#1}
+}
+
+\newcommand{\red}[1]
+{
+    \color{red}#1\color{black}
+}
+
+\newcommand{\mev}
+{
+    \unit{MeV}
+}
+
+\newcommand{\vecr}
+{
+    \bm{\mathbf{r}}
+}
+\newcommand{\vecR}
+{
+    \bm{\mathrm{R}}
+}\newcommand{\veck}
+{
+    \bm{\mathrm{k}}
+}
+\newcommand{\vecK}
+{
+    \bm{K}
+}
+\newcommand{\veca}
+{
+    \bm{a}
+}
+\newcommand{\vecb}
+{
+    \bm{b}
+}
+\newcommand{\vecE}
+{
+    \bm{\mathrm{E}}
+}
+\newcommand{\vecB}
+{
+    \bm{\mathrm{B}}
+}
+\newcommand{\vecA}
+{
+    \bm{\mathrm{A}}
+}
+\newcommand{\vecv}
+{
+    \bm{\bm{v}}
+}
+\newcommand{\ikr}
+{
+    i\bm{k}\cdot\bm{r}
+}
+\newcommand{\kr}
+{
+    \bm{\mathrm{k}}\cdot\bm{\mathrm{r}}
+}
+\newcommand{\ikR}
+{
+    i\bm{k}\cdot\bm{R}
+}
+\newcommand{\ik}[1]
+{
+    i\bm{k}\cdot #1
+}
+\newcommand{\vecj}
+{
+    \bm{\mathrm{j}}
+}
+\newcommand{\rt}
+{
+    (\hat{\bm{\mathrm{r}}},t)
+}
+\newcommand{\vecp}
+{
+    \bm{\mathrm{p}}
+}
+\newcommand{\vecD}
+{
+    \bm{\mathrm{D}}
+}
+\newcommand{\pvec}[2]
+{
+    \begin{pmatrix}
+        #1 \\ #2  
+    \end{pmatrix}
+}
+
+\newcommand{\lambdabar}
+{
+
+    \lambda \kern -0.5em\raise 0.5ex \hbox{--}
+    % \lambda \hspace{-.75em}-
+}
+
+\renewcommand{\i}
+{
+    \mathrm{i}
+}
+
+\newcommand{\mat}[4]
+{
+    \left(
+        \begin{array}{ccc}
+        #1 & #2  \\
+        #3 & #4 
+        \end{array}
+    \right)
+}
+
+\renewcommand{\cos}[1]{
+    \mathrm{cos} (#1)
+}
+\renewcommand{\sin}[1]{
+    \mathrm{sin} (#1)
+}
+
+\newcommand{\pdiff}[3]{
+ \ifnum #1<1%
+ \text{エラー�?よ�?�ん} (最初�?�引数は1以上�?�整数)\else{%
+ \ifnum #1=1 \frac{\partial #2}{\partial #3}\else%
+ \frac{\partial^{#1} #2}{\partial #3^{#1}}\fi
+ }\fi%
+}
+
+\newcommand{\diff}[3]{
+ \ifnum #1<1%
+ \text{エラー�?よ�?�ん} (最初�?�引数は1以上�?�整数)\else{%
+ \ifnum #1=1 \frac{d #2}{d #3}\else%
+ \frac{d^{#1} #2}{d #3^{#1}}\fi
+ }\fi%
+}
+
+
+
+
+%グラ�?
+
+\newcommand{\xjiku}[3]
+{
+	\draw [thick, -stealth](#1,0)--(#2,0) node [anchor=north]{$#3$};
+}
+\newcommand{\yjiku}[3]
+{
+	\draw [thick, -stealth](0,#1)--(0,#2) node [anchor=east]{$#3$};
+}
+\newcommand{\zeropoint}[1][north]
+{
+	\node [anchor=#1] at (0,0) {O};
+}
+\newcommand{\exline}[2]
+{
+    \draw [dashed](0,#2) node [anchor=east]{$#2$}--(#1,#2)--(#1,0) node[anchor=north]{$#1$};
+}
+\newcommand{\exlineV}[3][north]
+{
+    \draw [dashed](#2,0) node [anchor=#1]{$#2$}--(#2,#3);
+}
+\newcommand{\exlineH}[3][east]
+{
+    \draw [dashed](0,#3) node [anchor=#1]{$#3$}--(#2,#3);
+}
+\newcommand{\drawX}[3]
+{
+	\draw [domain=#1:#2] plot(\x,{#3});
+}
+
+
+
+
+\newcommand{\wave}[4]
+{
+    \draw (#1,#2) sin (#1+0.1,#2+#3*#4) cos (#1+0.2,#2) sin (#1+0.3,#2-#3*#4)cos(#1+0.4,#2) sin (#1+0.5,#2+#3*#4) cos (#1+0.6,#2) sin (#1+0.7,#2-#3*#4)cos(#1+0.8,#2) sin (#1+0.9,#2+#3*#4) cos (#1+1.0,#2) sin (#1+1.1,#2-#3*#4)cos(#1+1.2,#2) sin (#1+1.3,#2+#3*#4) cos (#1+1.4,#2) sin (#1+1.5,#2-#3*#4)cos(#1+1.6,#2) sin (#1+1.7,#2+#3*#4) cos (#1+1.8,#2) sin (#1+1.9,#2-#3*#4)cos(#1+2.0,#2) sin (#1+2.1,#2+#3*#4) cos (#1+2.2,#2) sin (#1+2.3,#2-#3*#4)cos(#1+2.4,#2);
+}
+%%%
+
+
+
+
+
+\newcommand{\defoTitle}[2][大石　禎希\\1693134s]{
+\title{\Huge #2}
+\author{\Large #1}
+\date{\large \today}
+}
+
+\makeatother
